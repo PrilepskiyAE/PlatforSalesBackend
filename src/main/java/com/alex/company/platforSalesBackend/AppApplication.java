@@ -1,4 +1,4 @@
-package com.alex.company.app;
+package com.alex.company.platforSalesBackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
