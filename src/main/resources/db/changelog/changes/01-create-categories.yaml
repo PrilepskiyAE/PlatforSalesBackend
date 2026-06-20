@@ -1,0 +1,132 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-categories-1
+      author: auto
+      changes:
+        - createTable:
+              tableName: categories
+              columns:
+                - column: { name: category_id, type: SMALLINT, constraints: { nullable: false } }
+                - column: { name: category_name, type: "VARCHAR(15)", constraints: { nullable: false } }
+                - column: { name: description, type: TEXT }
+                - column: { name: picture, type: BYTEA }
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: category_id
+                  valueNumeric: 1
+              - column:
+                  name: category_name
+                  value: Beverages
+              - column:
+                  name: description
+                  value: Soft drinks, coffees, teas, beers, and ales
+              - column:
+                  name: picture
+                  value: ""
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: category_id
+                  valueNumeric: 2
+              - column:
+                  name: category_name
+                  value: Condiments
+              - column:
+                  name: description
+                  value: Sweet and savory sauces, relishes, spreads, and seasonings
+              - column:
+                  name: picture
+                  value: ""
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: category_id
+                  valueNumeric: 3
+              - column:
+                  name: category_name
+                  value: Confections
+              - column:
+                  name: description
+                  value: Desserts, candies, and sweet breads
+              - column:
+                  name: picture
+                  value: ""
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: category_id
+                  valueNumeric: 4
+              - column:
+                  name: category_name
+                  value: Dairy Products
+              - column:
+                  name: description
+                  value: Cheeses
+              - column:
+                  name: picture
+                  value: ""
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: category_id
+                  valueNumeric: 5
+              - column:
+                  name: category_name
+                  value: Grains/Cereals
+              - column:
+                  name: description
+                  value: Breads, crackers, pasta, and cereal
+              - column:
+                  name: picture
+                  value: ""
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: category_id
+                  valueNumeric: 6
+              - column:
+                  name: category_name
+                  value: Meat/Poultry
+              - column:
+                  name: description
+                  value: Prepared meats
+              - column:
+                  name: picture
+                  value: ""
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: category_id
+                  valueNumeric: 7
+              - column:
+                  name: category_name
+                  value: Produce
+              - column:
+                  name: description
+                  value: Dried fruit and bean curd
+              - column:
+                  name: picture
+                  value: ""
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: category_id
+                  valueNumeric: 8
+              - column:
+                  name: category_name
+                  value: Seafood
+              - column:
+                  name: description
+                  value: Seaweed and fish
+              - column:
+                  name: picture
+                  value: ""

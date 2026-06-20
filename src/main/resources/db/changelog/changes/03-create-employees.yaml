@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: employees1
+      author: admin
+      changes:
+        - sqlFile:
+            path: sql/employees.sql
+            encoding: utf8
+            splitStatements: true
+            endDelimiter: ';'
+            relativeToChangelogFile: true

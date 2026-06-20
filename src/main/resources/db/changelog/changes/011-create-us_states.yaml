@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: us_states1
+      author: admin
+      changes:
+        - sqlFile:
+            path: sql/us_states.sql
+            encoding: utf8
+            splitStatements: true
+            endDelimiter: ';'
+            relativeToChangelogFile: true

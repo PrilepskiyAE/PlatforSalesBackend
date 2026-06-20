@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: products1
+      author: admin
+      changes:
+        - sqlFile:
+            path: sql/products.sql
+            encoding: utf8
+            splitStatements: true
+            endDelimiter: ';'
+            relativeToChangelogFile: true
