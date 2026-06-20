@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: territories1
+      author: admin
+      changes:
+        - sqlFile:
+            path: sql/territories.sql
+            encoding: utf8
+            splitStatements: true
+            endDelimiter: ';'
+            relativeToChangelogFile: true

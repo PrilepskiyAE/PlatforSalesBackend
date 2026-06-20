@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: employees-territories1
+      author: admin
+      changes:
+        - sqlFile:
+            path: sql/employees_territories.sql
+            encoding: utf8
+            splitStatements: true
+            endDelimiter: ';'
+            relativeToChangelogFile: true
