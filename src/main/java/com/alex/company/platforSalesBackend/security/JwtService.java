@@ -3,7 +3,6 @@ package com.alex.company.platforSalesBackend.security;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -73,7 +72,9 @@ public class JwtService {
     public String getUsernameFromToken(String token) {
         return parseClaims(token).getSubject();
     }
-
+    public Long getExpirationTime() {
+        return expiration;
+    }
     public List<String> getAuthoritiesFromToken(String token) {
         return (List<String>) parseClaims(token).get("authorities");
     }
