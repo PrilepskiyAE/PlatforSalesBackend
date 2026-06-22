@@ -3,7 +3,9 @@ package com.alex.company.platforSalesBackend.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
 
+@Getter
 public class RegisterRequest {
     @NotBlank(message = "Имя пользователя обязательно")
     @Size(min = 3, max = 50, message = "Имя пользователя должно быть от 3 до 50 символов")
@@ -19,12 +21,11 @@ public class RegisterRequest {
 
     private boolean isAdmin = false;
 
-    public String getUsername() {
-        return username;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
+    public RegisterRequest(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.isAdmin =false;
     }
 
     public void setAdmin(boolean admin) {
@@ -35,16 +36,8 @@ public class RegisterRequest {
         this.username = username;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setPassword(String password) {
