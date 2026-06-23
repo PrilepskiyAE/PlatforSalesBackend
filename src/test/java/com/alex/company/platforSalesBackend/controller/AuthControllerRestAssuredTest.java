@@ -6,6 +6,7 @@ import com.alex.company.platforSalesBackend.dto.RegisterRequest;
 import com.alex.company.platforSalesBackend.repository.UserRepository;
 import com.alex.company.platforSalesBackend.utils.JwtClaims;
 import io.jsonwebtoken.Claims;
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
@@ -22,6 +23,8 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.hamcrest.Matchers.*;
+
+
 @SpringBootTest(
         classes = AppApplication.class,
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
@@ -31,6 +34,9 @@ import static org.hamcrest.Matchers.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Rollback
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@Feature("Аутентификация")
+@Epic("API: Авторизация и регистрация пользователей")
+@Owner("Prilepskiy AE")
 public class AuthControllerRestAssuredTest {
 
     @Value("${local.server.port}")
@@ -57,6 +63,9 @@ public class AuthControllerRestAssuredTest {
 
     @Test
     @Order(1)
+    @DisplayName("Регистрация: возвращается токен и 201 Created")
+    @Description("Пользователь отправляет корректные данные для регистрации — система возвращает JWT-токен и статус 201")
+    @Severity(SeverityLevel.BLOCKER)
     void registerShouldReturnCreatedAndToken() {
 
         given()
@@ -72,6 +81,9 @@ public class AuthControllerRestAssuredTest {
 
     @Test
     @Order(2)
+    @DisplayName("Регистрация: токен содержит корректные claims")
+    @Description("После регистрации извлечённый JWT должен содержать subject, срок действия >=23ч, и роль ROLE_USER")
+    @Severity(SeverityLevel.CRITICAL)
     void registerCorrectToken() {
 
         String newToken =  given()
@@ -104,6 +116,9 @@ public class AuthControllerRestAssuredTest {
 
     @Test
     @Order(3)
+    @DisplayName("Логин: при верных данных возвращается токен и 200 OK")
+    @Description("Пользователь с существующими учётными данными должен получить валидный JWT и ответ 200")
+    @Severity(SeverityLevel.BLOCKER)
     void loginShouldReturnTokenWhenCredentialsCorrect() {
 
         given()
@@ -135,6 +150,9 @@ public class AuthControllerRestAssuredTest {
 
     @Test
     @Order(4)
+    @DisplayName("Логин: неверный пароль — возвращается 401 Unauthorized")
+    @Description("Попытка входа с неправильным паролем должна завершаться ошибкой 401 с сообщением")
+    @Severity(SeverityLevel.CRITICAL)
     void loginWithWrongPasswordShouldReturnUnauthorized() {
         given()
                 .contentType(ContentType.JSON)
@@ -148,6 +166,9 @@ public class AuthControllerRestAssuredTest {
 
     @Test
     @Order(5)
+    @DisplayName("Логин: пустой логин — возвращается 401")
+    @Description("Попытка входа с пустым username должна вернуть 401 (без утечки информации)")
+    @Severity(SeverityLevel.MINOR)
     void loginWithEmptyUsernameShouldReturnBadRequest() {
         LoginRequest loginRequest = new LoginRequest("", "password123");
 
