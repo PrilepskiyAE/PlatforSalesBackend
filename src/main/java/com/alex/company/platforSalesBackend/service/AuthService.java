@@ -52,7 +52,7 @@ public class AuthService {
         }
         userRepository.save(user);
 
-        String jwtToken = jwtService.generateToken(user.getUsername(), user.getRole());
+        String jwtToken = jwtService.generateToken(user.getUsername(),user.getRole());
         return new AuthResponse(jwtToken, jwtService.getExpirationTime());
     }
 
