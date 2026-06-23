@@ -2,6 +2,7 @@ package com.alex.company.platforSalesBackend.controller;
 
 import com.alex.company.platforSalesBackend.dto.AuthRequest;
 import com.alex.company.platforSalesBackend.dto.AuthResponse;
+import com.alex.company.platforSalesBackend.dto.ErrorResponse;
 import com.alex.company.platforSalesBackend.dto.RegisterRequest;
 import com.alex.company.platforSalesBackend.service.AuthService;
 import jakarta.validation.Valid;
@@ -10,6 +11,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,15 +54,16 @@ public class AuthController {
     )
     @ApiResponse(responseCode = "200", description = "Аутентификация успешна, токен выдан")
     @ApiResponse(responseCode = "401", description = "Неверные учётные данные")
-    @ApiResponse(responseCode = "404", description = "Пользователь не найден")
-    public ResponseEntity<AuthResponse> authenticate(
-            @Parameter(description = "Учётные данные пользователя") @Valid @RequestBody AuthRequest authRequest) {
+    public ResponseEntity<?> authenticate(
+            @Parameter(description = "Учётные данные пользователя")
+            @Valid @RequestBody AuthRequest authRequest) {
 
         try {
             AuthResponse authResponse = authService.authenticate(authRequest);
             return ResponseEntity.ok(authResponse);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(401).build();
+        } catch (BadCredentialsException | UsernameNotFoundException e) {
+            ErrorResponse error = ErrorResponse.of("Неверные учётные данные");
+            return ResponseEntity.status(401).body(error);
         }
     }
 }

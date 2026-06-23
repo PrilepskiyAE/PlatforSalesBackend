@@ -34,8 +34,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
 
+        // ✅ 1. Пропускаем публичные пути — без проверки токена и двойных вызовов
+        String path = request.getRequestURI();
+        if (path.startsWith("/api/auth/")) {
+            filterChain.doFilter(request, response); // один раз — и на выход
+            return;
+        }
+
         String authHeader = request.getHeader("Authorization");
 
+        // ✅ 2. Если нет токена — просто пропускаем (но путь уже не публичный — значит, потом проверит Security)
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
@@ -60,9 +68,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         } catch (Exception e) {
-            logger.warn("JWT processing failed: {}", e);
+            // ❌ Не лови и не глотай! НЕ ДАВАЙ filterChain идти дальше, если токен сломан!
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
+            response.getWriter().write("{\"message\": \"Недействительный или просроченный токен\"}");
+            return; // ⛔️ Ни в коем случае не filterChain.doFilter()!
         }
 
+        // ✅ Только если токен валиден — пускаем дальше
         filterChain.doFilter(request, response);
-    }
+}
 }

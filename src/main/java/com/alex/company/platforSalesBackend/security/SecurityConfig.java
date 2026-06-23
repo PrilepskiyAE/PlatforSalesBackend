@@ -2,6 +2,7 @@ package com.alex.company.platforSalesBackend.security;
 
 import com.alex.company.platforSalesBackend.config.CorsConfig;
 import com.alex.company.platforSalesBackend.config.JwtConfig;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,8 +36,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(AbstractHttpConfigurer::disable)
+        http.csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfig.corsConfigurationSource()))
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/api/auth/**").permitAll()
@@ -47,18 +47,24 @@ public class SecurityConfig {
                                 "/v3/api-docs/**",
                                 "/swagger-resources/**",
                                 "/webjars/**",
-                                "/v2/api-docs/**")
-                        .permitAll()
-                        .requestMatchers("/api/users/**","/api/cards/**").authenticated()
-                        .anyRequest().authenticated()
-                )
-                .addFilterBefore(
-                        jwtAuthenticationFilter(),
-                        UsernamePasswordAuthenticationFilter.class
-                );
+                                "/v2/api-docs/**"
+                        ).permitAll()
+
+                        .requestMatchers("/api/users/**").authenticated()
+                        .anyRequest().authenticated())
+                .exceptionHandling(exc -> exc
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                            response.setCharacterEncoding("UTF-8");  // ✅ ВАЖНО!
+                            response.setContentType("application/json;charset=UTF-8"); // ✅
+                            response.getWriter().write("{\"message\": \"Неверные учётные данные\"}");
+                            response.getWriter().flush(); // ✅ важно при ручной записи
+                        }))
+                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
+
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
