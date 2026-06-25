@@ -37,7 +37,7 @@ import static org.hamcrest.Matchers.*;
 @Feature("Аутентификация")
 @Epic("API: Авторизация и регистрация пользователей")
 @Owner("Prilepskiy AE")
-public class AuthControllerRestAssuredTest {
+public class AuthControllerTest {
 
     @Value("${local.server.port}")
     private int port;
