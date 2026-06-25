@@ -9,6 +9,11 @@ public class AuthRequest {
     @NotBlank(message = "Пароль не может быть пустым")
     private String password;
 
+    public AuthRequest(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }
