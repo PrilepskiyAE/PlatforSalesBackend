@@ -81,6 +81,7 @@ public class AuthServiceTest {
         assertThat(response.getToken()).isEqualTo(JWT_TOKEN);
         assertThat(response.getExpiresIn()).isEqualTo(EXPIRATION);
     }
+
     @Test
     @DisplayName("Регистрация: пользователь уже существует → бросает исключение")
     void register_UserExists_ShouldThrowUserAlreadyExistsException() {
