@@ -1,0 +1,28 @@
+package com.alex.company.platforSalesBackend.entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "categories")
+public class CategoryEntity {
+
+    @Id
+    @Column(name = "category_id", columnDefinition = "SMALLINT")
+    private Short categoryId;
+
+    @Column(name = "category_name", nullable = false, length = 15)
+    private String categoryName;
+
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
+
+    @Lob
+    @Column(name = "picture", columnDefinition = "BYTEA")
+    private byte[] picture;
+}
