@@ -50,22 +50,4 @@ public class SwaggerConfig {
                 );
     }
 
-    @Bean
-    public GroupedOpenApi publicApi() {
-        return GroupedOpenApi.builder()
-                .group("public")
-                .pathsToMatch("/api/auth/**")
-                .build();
-    }
-
-    @Bean
-    public GroupedOpenApi internalApi() {
-        return GroupedOpenApi.builder()
-                .group("internal")
-                .pathsToMatch("/api/**")
-                .pathsToExclude("/api/auth/**")
-                .build();
-    }
-
-
 }
