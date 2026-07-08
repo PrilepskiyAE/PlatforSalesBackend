@@ -1,8 +1,8 @@
 package com.alex.company.platforSalesBackend.service;
 
-import com.alex.company.platforSalesBackend.dto.AuthRequest;
-import com.alex.company.platforSalesBackend.dto.AuthResponse;
-import com.alex.company.platforSalesBackend.dto.RegisterRequest;
+import com.alex.company.platforSalesBackend.dto.auth.AuthRequest;
+import com.alex.company.platforSalesBackend.dto.auth.AuthResponse;
+import com.alex.company.platforSalesBackend.dto.registration.RegisterRequest;
 import com.alex.company.platforSalesBackend.entity.UserEntity;
 import com.alex.company.platforSalesBackend.exception.AuthenticationException;
 import com.alex.company.platforSalesBackend.exception.InvalidRegistrationDataException;
