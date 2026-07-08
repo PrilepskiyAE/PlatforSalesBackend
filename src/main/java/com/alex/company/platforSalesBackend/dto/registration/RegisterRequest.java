@@ -1,4 +1,4 @@
-package com.alex.company.platforSalesBackend.dto;
+package com.alex.company.platforSalesBackend.dto.registration;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

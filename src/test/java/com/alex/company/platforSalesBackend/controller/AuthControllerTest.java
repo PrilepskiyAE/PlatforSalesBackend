@@ -1,8 +1,8 @@
 package com.alex.company.platforSalesBackend.controller;
 
 import com.alex.company.platforSalesBackend.AppApplication;
-import com.alex.company.platforSalesBackend.dto.LoginRequest;
-import com.alex.company.platforSalesBackend.dto.RegisterRequest;
+import com.alex.company.platforSalesBackend.dto.auth.login.LoginRequest;
+import com.alex.company.platforSalesBackend.dto.registration.RegisterRequest;
 import com.alex.company.platforSalesBackend.repository.UserRepository;
 import com.alex.company.platforSalesBackend.utils.JwtClaims;
 import io.jsonwebtoken.Claims;

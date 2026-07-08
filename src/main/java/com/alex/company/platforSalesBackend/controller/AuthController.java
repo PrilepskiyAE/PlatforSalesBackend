@@ -1,9 +1,9 @@
 package com.alex.company.platforSalesBackend.controller;
 
-import com.alex.company.platforSalesBackend.dto.AuthRequest;
-import com.alex.company.platforSalesBackend.dto.AuthResponse;
+import com.alex.company.platforSalesBackend.dto.auth.AuthRequest;
+import com.alex.company.platforSalesBackend.dto.auth.AuthResponse;
 import com.alex.company.platforSalesBackend.dto.ErrorResponse;
-import com.alex.company.platforSalesBackend.dto.RegisterRequest;
+import com.alex.company.platforSalesBackend.dto.registration.RegisterRequest;
 import com.alex.company.platforSalesBackend.service.AuthService;
 import jakarta.validation.Valid;
 import io.swagger.v3.oas.annotations.Operation;

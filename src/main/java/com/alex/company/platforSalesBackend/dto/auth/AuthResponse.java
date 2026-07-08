@@ -1,4 +1,4 @@
-package com.alex.company.platforSalesBackend.dto;
+package com.alex.company.platforSalesBackend.dto.auth;
 
 
 public class AuthResponse {

@@ -1,10 +1,10 @@
 package com.alex.company.platforSalesBackend.service.category;
 
-import com.alex.company.platforSalesBackend.dto.CategoryRequest;
-import com.alex.company.platforSalesBackend.dto.CategoryResponse;
+import com.alex.company.platforSalesBackend.dto.category.CategoryRequest;
+import com.alex.company.platforSalesBackend.dto.category.CategoryResponse;
 import com.alex.company.platforSalesBackend.entity.CategoryEntity;
 import com.alex.company.platforSalesBackend.repository.CategoryRepository;
-
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 
 public class CategoryServiceImpl implements CategoryService{
@@ -28,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService{
         }
 
         CategoryEntity entity = new CategoryEntity(
-                    null, // categoryId будет заполнен после save
+                    null,
                     request.getCategoryName(),
                     request.getDescription(),
                     null
@@ -45,16 +45,36 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public CategoryResponse getCategoryById(Short id) {
-        return null;
+        if (id == null) {
+            throw new IllegalArgumentException("id cannot be null");
+        }
+
+        return categoryRepository.findById(id).map( it -> new CategoryResponse(
+                it.getCategoryId(),
+                it.getCategoryName(),
+                it.getDescription())
+
+        ).orElseThrow(() -> new EntityNotFoundException("Category not found with id: " + id));
+
+
+
     }
 
     @Override
     public List<CategoryResponse> getAllCategories() {
-        return List.of();
+        return categoryRepository.findAll().stream().map( it -> new CategoryResponse(
+                it.getCategoryId(),
+                it.getCategoryName(),
+                it.getDescription())
+
+        ).toList();
     }
 
     @Override
     public void deleteCategory(Short id) {
-
+        if (id == null) {
+            throw new IllegalArgumentException("id cannot be null");
+        }
+        categoryRepository.deleteById(id);
     }
 }
