@@ -5,8 +5,10 @@ import com.alex.company.platforSalesBackend.dto.category.CategoryResponse;
 import com.alex.company.platforSalesBackend.entity.CategoryEntity;
 import com.alex.company.platforSalesBackend.repository.CategoryRepository;
 import jakarta.persistence.EntityNotFoundException;
-import java.util.List;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+@Service
 public class CategoryServiceImpl implements CategoryService{
     private final CategoryRepository categoryRepository;
 
