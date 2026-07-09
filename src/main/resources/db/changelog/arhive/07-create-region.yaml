@@ -4,7 +4,7 @@ databaseChangeLog:
       author: admin
       changes:
         - sqlFile:
-            path: sql/region.sql
+            path: ../changes/sql/region.sql
             encoding: utf8
             splitStatements: true
             endDelimiter: ';'
