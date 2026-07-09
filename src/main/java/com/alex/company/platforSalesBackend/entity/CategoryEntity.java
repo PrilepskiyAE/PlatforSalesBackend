@@ -22,7 +22,7 @@ public class CategoryEntity {
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @Lob
+   // @Lob
     @Column(name = "picture", columnDefinition = "BYTEA")
     private byte[] picture;
 }
