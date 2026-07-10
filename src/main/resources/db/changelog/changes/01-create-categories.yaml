@@ -6,7 +6,7 @@ databaseChangeLog:
         - createTable:
               tableName: categories
               columns:
-                - column: { name: category_id, type: SMALLINT, constraints: { nullable: false } }
+                - column: { name: category_id, type: BIGINT, constraints: { nullable: false } }
                 - column: { name: category_name, type: "VARCHAR(15)", constraints: { nullable: false } }
                 - column: { name: description, type: TEXT }
                 - column: { name: picture, type: BYTEA }
