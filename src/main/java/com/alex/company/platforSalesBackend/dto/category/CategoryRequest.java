@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CategoryRequest {
-    private Short categoryId;
     private String categoryName;
     private String description;
 }

@@ -39,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService{
         CategoryEntity saved = categoryRepository.save(entity);
 
         return new CategoryResponse(
-                saved.getCategoryId(),
+                null,
                 saved.getCategoryName(),
                 saved.getDescription()
         );
@@ -52,7 +52,7 @@ public class CategoryServiceImpl implements CategoryService{
         }
 
         return categoryRepository.findById(id).map( it -> new CategoryResponse(
-                it.getCategoryId(),
+                it.getId(),
                 it.getCategoryName(),
                 it.getDescription())
 
@@ -65,7 +65,7 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public List<CategoryResponse> getAllCategories() {
         return categoryRepository.findAll().stream().map( it -> new CategoryResponse(
-                it.getCategoryId(),
+                it.getId(),
                 it.getCategoryName(),
                 it.getDescription())
 
