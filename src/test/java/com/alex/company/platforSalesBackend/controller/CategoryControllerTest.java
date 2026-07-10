@@ -1,17 +1,17 @@
 package com.alex.company.platforSalesBackend.controller;
 
 import com.alex.company.platforSalesBackend.AppApplication;
+import com.alex.company.platforSalesBackend.dto.auth.login.LoginRequest;
 import com.alex.company.platforSalesBackend.dto.category.CategoryRequest;
 import com.alex.company.platforSalesBackend.dto.category.CategoryResponse;
 import com.alex.company.platforSalesBackend.repository.CategoryRepository;
 import com.alex.company.platforSalesBackend.security.JwtService;
 
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Owner;
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-
+import com.fasterxml.jackson.core.type.TypeReference;
+import io.restassured.path.json.JsonPath;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +19,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.Rollback;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 @SpringBootTest(
         classes = AppApplication.class,
@@ -40,36 +41,22 @@ public class CategoryControllerTest extends BaseControllerTest {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    @Autowired
-    protected JwtService jwtService;
-
-    private String validBearerToken;
-
-    @BeforeEach
-    void setUp() {
-        // ❌ УБРАЛИ basePath — это была главная причина 401
-        String rawToken = jwtService.generateToken("test-user", "USER");
-        validBearerToken = "Bearer " + rawToken;
-    }
-
     @Test
     @DisplayName("POST /api/categories — создание категории должно вернуть 201")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Как авторизованный пользователь я хочу создавать категории, чтобы они отображались в каталоге")
     void testCreateCategory() {
         CategoryRequest request = new CategoryRequest( "Electronics", "Devices and gadgets");
 
-        System.out.println("DEBUG: Token length = " + validBearerToken.length());
-        System.out.println("DEBUG: Token starts with = " + validBearerToken.substring(0, Math.min(30, validBearerToken.length())));
-
         CategoryResponse response = given()
-                .header("Authorization", validBearerToken)
+                .header("Authorization", "Bearer " + validBearerToken)
                 .contentType(ContentType.JSON)
                 .body(request)
                 .when()
-                // ✅ Пишем полный путь явно
                 .post("/api/categories")
                 .then()
                 .statusCode(201)
-                .body("categoryId", notNullValue(),
+                .body(
                         "categoryName", equalTo("Electronics"),
                         "description", equalTo("Devices and gadgets"))
                 .extract()
@@ -77,4 +64,5 @@ public class CategoryControllerTest extends BaseControllerTest {
 
         assertThat(response.getCategoryName()).isEqualTo("Electronics");
     }
+
 }

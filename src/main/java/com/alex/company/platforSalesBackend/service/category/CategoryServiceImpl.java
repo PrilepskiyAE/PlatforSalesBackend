@@ -29,12 +29,9 @@ public class CategoryServiceImpl implements CategoryService{
             throw new IllegalArgumentException("categoryName cannot exceed 15 characters");
         }
 
-        CategoryEntity entity = new CategoryEntity(
-                    null,
-                    request.getCategoryName(),
-                    request.getDescription(),
-                    null
-            );
+        CategoryEntity entity = new CategoryEntity();
+        entity.setCategoryName(request.getCategoryName());
+        entity.setDescription(request.getDescription());
 
         CategoryEntity saved = categoryRepository.save(entity);
 
@@ -46,26 +43,24 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    public CategoryResponse getCategoryById(Short id) {
+    public CategoryResponse getCategoryById(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("id cannot be null");
         }
 
         return categoryRepository.findById(id).map( it -> new CategoryResponse(
-                it.getId(),
+                it.getCategoryId(),
                 it.getCategoryName(),
                 it.getDescription())
 
         ).orElseThrow(() -> new EntityNotFoundException("Category not found with id: " + id));
-
-
-
     }
+
 
     @Override
     public List<CategoryResponse> getAllCategories() {
         return categoryRepository.findAll().stream().map( it -> new CategoryResponse(
-                it.getId(),
+                it.getCategoryId(),
                 it.getCategoryName(),
                 it.getDescription())
 
@@ -73,7 +68,7 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    public void deleteCategory(Short id) {
+    public void deleteCategory(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("id cannot be null");
         }

@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: z_chema1
+      id: territories1
       author: admin
       changes:
         - sqlFile:
-            path: ../changes/sql/z_chema.sql
+            path: sql/territories.sql
             encoding: utf8
             splitStatements: true
             endDelimiter: ';'

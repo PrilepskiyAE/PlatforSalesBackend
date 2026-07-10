@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<CategoryEntity,  Short> {
+public interface CategoryRepository extends JpaRepository<CategoryEntity,  Long> {
     Optional<CategoryEntity> findByCategoryName(String categoryName);
 
     List<CategoryEntity> findByCategoryNameContainingIgnoreCase(String fragment);
