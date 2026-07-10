@@ -12,9 +12,9 @@ public interface CategoryController {
 
     ResponseEntity<CategoryResponse> createCategory(@Valid @RequestBody CategoryRequest request);
 
-    ResponseEntity<CategoryResponse> getCategoryById(Short id);
+    ResponseEntity<CategoryResponse> getCategoryById(Long id);
 
     ResponseEntity<List<CategoryResponse>> getAllCategories();
 
-    ResponseEntity<Void> deleteCategory(Short id);
+    ResponseEntity<Void> deleteCategory(Long id);
 }

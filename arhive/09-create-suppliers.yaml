@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: shippers1
+      id: suppliers1
       author: admin
       changes:
         - sqlFile:
-            path: ../changes/sql/shippers.sql
+            path: sql/suppliers.sql
             encoding: utf8
             splitStatements: true
             endDelimiter: ';'

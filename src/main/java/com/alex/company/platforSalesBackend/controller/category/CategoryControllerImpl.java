@@ -56,7 +56,7 @@ public class CategoryControllerImpl implements CategoryController {
     @Override
     public ResponseEntity<CategoryResponse> getCategoryById(
             @Parameter(description = "ID категории", example = "1")
-            @PathVariable Short id
+            @PathVariable Long id
     ) {
         CategoryResponse response = categoryService.getCategoryById(id);
         return ResponseEntity.ok(response);
@@ -87,7 +87,7 @@ public class CategoryControllerImpl implements CategoryController {
     @Override
     public ResponseEntity<Void> deleteCategory(
             @Parameter(description = "ID категории", example = "1")
-            @PathVariable Short id
+            @PathVariable Long id
     ) {
         categoryService.deleteCategory(id);
         return ResponseEntity.noContent().build();
