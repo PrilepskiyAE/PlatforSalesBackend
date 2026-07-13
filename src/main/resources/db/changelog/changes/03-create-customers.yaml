@@ -1,0 +1,91 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-customer-customer-demo
+      author: alex
+      changes:
+        - createTable:
+            tableName: customer_customer_demo
+            columns:
+              - column:
+                  name: customer_id
+                  type: bpchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: customer_type_id
+                  type: bpchar
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create-table-customer-demographics
+      author: alex
+      changes:
+        - createTable:
+            tableName: customer_demographics
+            columns:
+              - column:
+                  name: customer_type_id
+                  type: bpchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: customer_desc
+                  type: text
+
+  - changeSet:
+      id: create-table-customers
+      author: alex
+      changes:
+        - createTable:
+            tableName: customers
+            columns:
+              - column:
+                  name: customer_id
+                  type: bpchar(5)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: company_name
+                  type: varchar(40)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contact_name
+                  type: varchar(30)
+              - column:
+                  name: contact_title
+                  type: varchar(30)
+              - column:
+                  name: address
+                  type: varchar(60)
+              - column:
+                  name: city
+                  type: varchar(15)
+              - column:
+                  name: region
+                  type: varchar(15)
+              - column:
+                  name: postal_code
+                  type: varchar(10)
+              - column:
+                  name: country
+                  type: varchar(15)
+              - column:
+                  name: phone
+                  type: varchar(24)
+              - column:
+                  name: fax
+                  type: varchar(24)
+
+  - changeSet:
+      id: customers1
+      author: alex
+      changes:
+        - sqlFile:
+            path: sql/customers.sql
+            encoding: utf8
+            splitStatements: true
+            endDelimiter: ';'
+            relativeToChangelogFile: true
+
