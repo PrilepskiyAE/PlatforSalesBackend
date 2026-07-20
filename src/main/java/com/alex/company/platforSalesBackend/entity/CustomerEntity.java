@@ -1,5 +1,6 @@
 package com.alex.company.platforSalesBackend.entity;
 
+import com.alex.company.platforSalesBackend.dto.customer.CustomerResponse;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -7,6 +8,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity(name = "Customer")
 @Table(name = "customers")
@@ -47,4 +49,5 @@ public class CustomerEntity {
 
     @Column(name = "fax", length = 24)
     private String fax;
+
 }
