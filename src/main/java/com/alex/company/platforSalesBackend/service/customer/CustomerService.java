@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public interface CustomerService {
     CustomerResponse createCustomer(CustomerRequest request);
-    CustomerResponse getCustomerById(Long id);
+    CustomerResponse getCustomerById(String id);
     List<CustomerResponse> getAllCustomer();
-    void deleteCustomer(Long id);
+    void deleteCustomer(String id);
 }
