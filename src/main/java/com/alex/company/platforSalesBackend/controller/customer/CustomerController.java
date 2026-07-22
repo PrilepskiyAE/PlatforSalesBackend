@@ -13,9 +13,9 @@ import java.util.List;
 public interface CustomerController {
     ResponseEntity<CustomerResponse> createCustomer(@Valid @RequestBody CustomerRequest request);
 
-    ResponseEntity<CustomerResponse> getCustomerById(Long id);
+    ResponseEntity<CustomerResponse> getCustomerById(String id);
 
     ResponseEntity<List<CustomerResponse>> getAllCustomers();
 
-    ResponseEntity<Void> deleteCustomer(Long id);
+    ResponseEntity<Void> deleteCustomer(String id);
 }
